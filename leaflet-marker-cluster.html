@@ -1,0 +1,61 @@
+<link rel="import" href="leaflet-core.html">
+
+<!--
+Marker clustering (<a href="https://github.com/Leaflet/Leaflet.markercluster/tree/leaflet-0.7">Reference</a>).
+
+##### Example
+
+    <leaflet-marker-cluster>
+        <leaflet-marker latitude="51.505" longitude="-0.09"> </leaflet-marker>
+    </leaflet-marker-clusterp>
+
+
+@element leaflet-marker-cluster
+@blurb an element which represents a marker cluster group
+@demo https://leaflet-extras.github.io/leaflet-map/demo.html
+@homepage https://leaflet-extras.github.io/leaflet-map/
+-->
+
+<dom-module id="leaflet-marker-cluster">
+  <template>
+    <content></content>
+  </template>
+</dom-module>
+
+<script>
+  "use strict";
+
+  Polymer({
+    is: 'leaflet-marker-cluster',
+
+    properties: {
+      container: {
+        type: Object,
+        observer: '_containerChanged'
+      } 
+    },
+  
+    _containerChanged: function() {
+      if (this.container) {
+        var feature = L.markerClusterGroup({ chunkedLoading: true, disableClusteringAtZoom: 20 });
+        this.feature = feature;
+        this.feature.addTo(this.container);
+        this.registerContainerOnChildren();
+      }
+    },
+
+    registerContainerOnChildren: function() {
+      for (var i = 0; i < this.children.length; i++) {
+        this.children[i].container = this.feature;
+      }
+    },
+    
+    detached: function() {
+      if (this.container && this.feature) {
+        this.container.removeLayer(this.feature);
+      }
+    }
+  });
+</script>
+
+
