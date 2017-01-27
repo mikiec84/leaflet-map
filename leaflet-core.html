@@ -745,17 +745,27 @@ add a marker with a popup text.
 		},
 
 		_fitToMarkers: function () {
-			if ( this.map && this.fitToMarkers) {
+			if(this.map && this.fitToMarkers) {
 				var bounds = [];
-				for( var i = 0, f; f = this.children[i]; i++ ) {
-					if ( f.latitude && f.longitude ) {
-						bounds.push( [ f.latitude, f.longitude ] );
+				for(var i = 0, f; f = this.children[i]; i++) {
+					if(f.latitude && f.longitude) {
+						this._addToBounds(f, bounds);
+					} else if(f.localName === 'leaflet-marker-cluster') {
+						for(var j = 0, marker; marker = f.children[j]; j++) {
+							this._addToBounds(marker, bounds);
+						}
 					}
 				}
-				if ( bounds.length > 0 ) {
-					this.map.fitBounds( bounds );
+				if (bounds.length > 0) {
+					this.map.fitBounds(bounds);
 					this.map.invalidateSize();
 				}
+			}
+		},
+
+		_addToBounds: function(marker, bounds) {
+			if(marker.latitude && marker.longitude) {
+				bounds.push([marker.latitude, marker.longitude]);
 			}
 		},
 
