@@ -1,5 +1,7 @@
 # leaflet-map
 
+(Forked from original repo to add support for marker clustering plugin found [here](https://github.com/Leaflet/Leaflet.markercluster/tree/leaflet-0.7))
+
 *leaflet-map* is a web-component which provides access to the [leaflet map](http://leafletjs.com) 
 JavaScript library via html elements.
 
