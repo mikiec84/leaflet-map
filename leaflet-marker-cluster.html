@@ -35,6 +35,11 @@ Marker clustering (<a href="https://github.com/Leaflet/Leaflet.markercluster/tre
       } 
     },
   
+    ready: function() {
+      this._mutationObserver = new MutationObserver(this.registerContainerOnChildren.bind(this));
+      this._mutationObserver.observe(this, {childList: true});
+    },
+
     _containerChanged: function() {
       if (this.container) {
         var feature = L.markerClusterGroup({ chunkedLoading: true, disableClusteringAtZoom: 20 });
@@ -54,6 +59,7 @@ Marker clustering (<a href="https://github.com/Leaflet/Leaflet.markercluster/tre
       if (this.container && this.feature) {
         this.container.removeLayer(this.feature);
       }
+      this._mutationObserver.disconnect();
     }
   });
 </script>
