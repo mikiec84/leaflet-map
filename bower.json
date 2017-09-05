@@ -1,6 +1,6 @@
 {
   "name": "leaflet-map",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "authors": [
     "Hendrik Brummermann <nhnb@users.sourceforge.net>",
     "Prateek Saxena <prtksxna@gmail.com>"
@@ -25,8 +25,8 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "^1.0.0",
-    "leaflet": "^0.7.3",
+    "polymer": "Polymer/polymer#^2.0.0",
+    "leaflet": "^1.0.0",
     "leaflet.markercluster": "^0.5.0"
   }
 }
