@@ -48,6 +48,9 @@ add a marker with a popup text.
 		<style>
 		  :host { display: block; }
 		  :host #map {height:100%; width:100%}
+		  .leaflet-top, .leaflet-bottom {
+		    z-index: 100 !important;
+		  }
 		</style>
 		<div id="map"></div>
 		<slot id="markers"></slot>
