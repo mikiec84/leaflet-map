@@ -739,10 +739,11 @@ add a marker with a popup text.
 
 		_viewChanged: function(newValue, oldValue) {
 			if (this.map && !this._ignoreViewChange) {
-				setTimeout(function() {
-					this.map.setView(L.latLng(this.latitude, this.longitude), this.zoom);
-				}.bind(this), 1);
-			}
+				this._debounceJob = Polymer.Debouncer.debounce(this._debounceJob,
+						Polymer.Async.timeOut.after(1),
+						() => {
+				this.map.setView(L.latLng(this.latitude, this.longitude), this.zoom);
+			});
 		},
 
 		registerMapOnChildren: function() {
